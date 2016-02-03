@@ -60,6 +60,7 @@ $endif$
 % makes font serif
 \renewcommand*\sfdefault{epigrafica}
 \usefonttheme[onlymath]{serif}
+\usepackage{microtype}
 \usepackage{wrapfig}
 
 % include and configure hyperlinks
@@ -166,6 +167,17 @@ $endif$
 \usepackage{ulem}
 \usepackage{framed}
 \usepackage{tikz}
+
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage[variant=british]{english}
+\else
+  \usepackage[british]{babel}
+\fi
+
+$for(header-includes)$
+$header-includes$
+$endfor$
 
 
 %%%%%%%%%%%%%%%%%%%%%
