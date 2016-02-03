@@ -136,7 +136,7 @@ $endif$
 %\insertsubsection       %
 %\hfill                  % horizontal filling space
 \insertshortauthor      % inserts author arguement in []'s
-\,(\insertshortinstitute)
+\,$if(institute)$(\insertshortinstitute)$endif$
 \hspace*{1em}           % a 1em space between author and page number
 \insertshortdate
 \hfill
