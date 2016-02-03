@@ -1,121 +1,6 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(handout)$handout,$endif$$if(beamer)$ignorenonframetext,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{$documentclass$}
-\setbeamertemplate{caption}[numbered]
-\setbeamertemplate{caption label separator}{: }
-\setbeamercolor{caption name}{fg=normal text.fg}
-\beamertemplatenavigationsymbols$if(navigation)$$navigation$$else$empty$endif$
-$if(fontfamily)$
-\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-$else$
-\usepackage{lmodern}
-$endif$
-\usepackage{amssymb,amsmath}
-\usepackage{ifxetex,ifluatex}
-\usepackage{fixltx2e} % provides \textsubscript
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
-  \usepackage[utf8]{inputenc}
-$if(euro)$
-  \usepackage{eurosym}
-$endif$
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
-$if(euro)$
-  \newcommand{\euro}{€}
-$endif$
-$if(mainfont)$
-    \setmainfont[$for(mainfontoptions)$$mainfontoptions$$sep$,$endfor$]{$mainfont$}
-$endif$
-$if(sansfont)$
-    \setsansfont[$for(sansfontoptions)$$sansfontoptions$$sep$,$endfor$]{$sansfont$}
-$endif$
-$if(monofont)$
-    \setmonofont[Mapping=tex-ansi$if(monofontoptions)$,$for(monofontoptions)$$monofontoptions$$sep$,$endfor$$endif$]{$monofont$}
-$endif$
-$if(mathfont)$
-    \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
-$endif$
-$if(CJKmainfont)$
-    \usepackage{xeCJK}
-    \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
-$endif$
-\fi
-$if(theme)$
-\usetheme{$theme$}
-$endif$
-$if(colortheme)$
-\usecolortheme{$colortheme$}
-$endif$
-$if(fonttheme)$
-\usefonttheme{$fonttheme$}
-$endif$
-$if(mainfont)$
-\usefonttheme{serif} % use mainfont rather than sansfont for slide text
-$endif$
-$if(innertheme)$
-\useinnertheme{$innertheme$}
-$endif$
-$if(outertheme)$
-\useoutertheme{$outertheme$}
-$endif$
-% use upquote if available, for straight quotes in verbatim environments
-\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-% use microtype if available
-\IfFileExists{microtype.sty}{%
-\usepackage{microtype}
-\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
-}{}
-$if(lang)$
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
-$if(babel-newcommands)$
-  $babel-newcommands$
-$endif$
-\else
-  \usepackage{polyglossia}
-  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
-$for(polyglossia-otherlangs)$
-  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
-$endfor$
-\fi
-$endif$
-\newif\ifbibliography
-$if(natbib)$
-\usepackage{natbib}
-\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
-$endif$
-$if(biblatex)$
-\usepackage$if(biblio-style)$[style=$biblio-style$]$endif${biblatex}
-$if(biblatexoptions)$\ExecuteBibliographyOptions{$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$}$endif$
-$for(bibliography)$
-\addbibresource{$bibliography$}
-$endfor$
-$endif$
-$if(listings)$
-\usepackage{listings}
-$endif$
-$if(lhs)$
-\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
-$endif$
-$if(highlighting-macros)$
-$highlighting-macros$
-$endif$
-$if(verbatim-in-note)$
-\usepackage{fancyvrb}
-\VerbatimFootnotes % allows verbatim text in footnotes
-$endif$
-$if(tables)$
-\usepackage{longtable,booktabs}
-\usepackage{caption}
-% These lines are needed to make table captions work with longtable:
-\makeatletter
-\def\fnum@table{\tablename~\thetable}
-\makeatother
-$endif$
+\documentclass[$if(fontsize)$$fontsize$,$else$9pt,$endif$]{beamer}
+% use minimalist beamer template as a starting point
+\usebeamertemplate{default}
 $if(graphics)$
 \usepackage{graphicx,grffile}
 \makeatletter
@@ -128,122 +13,245 @@ $if(graphics)$
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
-% Prevent slide breaks in the middle of a paragraph:
-\widowpenalties 1 10000
-\raggedbottom
+%%%%%%%%%%%%%%%%%%
+%%% colouring  %%%
+%%%%%%%%%%%%%%%%%%
 
-$if(section-titles)$
-\AtBeginPart{
-  \let\insertpartnumber\relax
-  \let\partname\relax
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \let\insertsectionnumber\relax
-    \let\sectionname\relax
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \let\insertsubsectionnumber\relax
-  \let\subsectionname\relax
-  \frame{\subsectionpage}
-}
-$endif$
+% sam's favourite blues
+\definecolor{bleufonce}{RGB}{65,105,225}
+\definecolor{bleu}{RGB}{209,232,255}
+\definecolor{bleuleger}{RGB}{208,218,247}
+\definecolor{ic-darkblue}{RGB}{16,66,122}
+\definecolor{ic-lightblue}{RGB}{109,153,204}
+%\definecolor{vertfonce}{RGB}{96,189,99}
+\definecolor{vert}{RGB}{96,189,99}
+\definecolor{vertfonce}{RGB}{61,147,64}
+\definecolor{vertleger}{RGB}{183,225,184}
+\definecolor{purple}{RGB}{138, 43, 226}
+\definecolor{lightgray}{gray}{0.5}
 
-$if(links-as-notes)$
-% Make links footnotes instead of hotlinks:
-\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
-$endif$
-$if(strikeout)$
-\usepackage[normalem]{ulem}
-% avoid problems with \sout in headers with hyperref:
-\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
-$endif$
-\setlength{\emergencystretch}{3em}  % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-$if(numbersections)$
-\setcounter{secnumdepth}{5}
-$else$
-\setcounter{secnumdepth}{0}
-$endif$
-$if(dir)$
-\ifxetex
-  % load bidi as late as possible as it modifies e.g. graphicx
-  $if(latex-dir-rtl)$
-  \usepackage[RTLdocument]{bidi}
-  $else$
-  \usepackage{bidi}
-  $endif$
-\fi
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \TeXXeTstate=1
-  \newcommand{\RL}[1]{\beginR #1\endR}
-  \newcommand{\LR}[1]{\beginL #1\endL}
-  \newenvironment{RTL}{\beginR}{\endR}
-  \newenvironment{LTR}{\beginL}{\endL}
-\fi
-$endif$
-$for(header-includes)$
-$header-includes$
-$endfor$
+% set colors
+\setbeamercolor{title}{fg=black}
+%\setbeamercolor{frametitle}{fg=bleufonce}
+\setbeamercolor{frametitle}{fg=ic-darkblue}
+\setbeamercolor{framesubtitle}{fg=ic-lightblue}
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor{background canvas}{bg=white}%=milkyblue}
 
-$if(title)$
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%% font formatting  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+% a font package which has a nicer serif font
+% than usual
+%\usepackage{helvet}
+%\usepackage{charter}
+%i%\usepackage{epigrafica}
+%\usepackage{eulervm}
+%\renewcommand*\rmdefault{charter}
+
+% makes bulleted lists appear slightly
+% transparent before uncovering the bullet
+\beamertemplatetransparentcovereddynamicmedium
+
+% puts titles in bold
+\usefonttheme{structurebold}
+
+% makes font serif
+\renewcommand*\sfdefault{epigrafica}
+\usefonttheme[onlymath]{serif}
+\usepackage{wrapfig}
+
+% include and configure hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    %unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    %pdfstartview={FitH},    % fits the width of the page to the window
+    %pdftitle={My title},    % title
+    %pdfauthor={Author},     % author
+    %pdfsubject={Subject},   % subject of the document
+    %pdfcreator={Creator},   % creator of the document
+    %pdfproducer={Producer}, % producer of the document
+    %pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    %pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    %pdfborderstyle={/S/U/W 1}
+    linkcolor=black,        % color of internal links
+    citecolor=blue,        % color of links to bibliography
+    filecolor=blue,      % color of file links
+    urlcolor=blue,          % color of external links
+    %linkbordercolor=blue
+}
+
+% allow for upright greek
+\usepackage{upgreek}
+
+% split long lists etc into two columns
+\usepackage{multicol}
+
+%%%%%%%%%%%%%%%%%%%
+%% table spacing %%
+%%%%%%%%%%%%%%%%%%%
+%\newcommand\Top{\rule{0pt}{2.6ex}}
+%\newcommand\Bot{\rule[-1.2ex]{0pt}{0pt}}
+\renewcommand{\arraystretch}{1.5}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% math and symbol formatting  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+
+% Backup with slide numbers that don't contribute to the total
+\newcommand{\beginbackup}{
+   \newcounter{framenumbervorappendix}
+   \setcounter{framenumbervorappendix}{\value{framenumber}}
+}
+\newcommand{\backupend}{
+   \addtocounter{framenumbervorappendix}{-\value{framenumber}}
+   \addtocounter{framenumber}{\value{framenumbervorappendix}}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% slide numbering footer formatting  %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% turns off useless semitransparent buttons
+% on the bottom left hand side of all slides
+% seriously, they contribute ABSOLUTELY NOTHING
+\setbeamertemplate{navigation symbols}{}
+
+% edits the template's footer
+\setbeamertemplate
+{footline}              %
+{                       %
+\color{gray}            % makes the text in the footer grey
+\hspace*{1em}           % moves stuff 1em from the LHS of the page
+%\,/\,                   %  linux directory type structure
+%\insertsubsection       %
+%\hfill                  % horizontal filling space
+\insertshortauthor      % inserts author arguement in []'s
+\,(\insertshortinstitute)
+\hspace*{1em}           % a 1em space between author and page number
+\insertshortdate
+\hfill
+\insertsection          % prints section name if any
+\hfill
+\insertframenumber/\inserttotalframenumber      % page number
+\hspace*{1em}           % moves stuff 1em from the RHS of the page
+% \vskip0.05cm          % moves stuff 10pts up from the bottom
+\vspace*{1em}           %
+}
+%\setlength{\leftmargini}{0pt}
+\makeatletter
+\g@addto@macro\bfseries{\boldmath}
+\makeatother
+\usepackage[absolute,overlay]{textpos}
+\setbeamercolor{block body}{bg=white}
+
+\hypersetup{
+  pdftitle={$title$}
+  pdfauthor={$author$}
+}
+\usepackage{xcolor}
+\definecolor{code}{RGB}{0,100,0}
+\definecolor{junglegreen}{rgb}{0.16, 0.67, 0.53}
+
+\usepackage{wasysym}
+\usepackage{ulem}
+\usepackage{framed}
+\usepackage{tikz}
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%% title fields  %%%
+%%%%%%%%%%%%%%%%%%%%%
+
 \title{$title$}
-$endif$
-$if(subtitle)$
-\subtitle{$subtitle$}
-$endif$
-$if(author)$
-\author{$for(author)$$author$$sep$ \and $endfor$}
-$endif$
-\date{$date$}
+$if(subtitle)$\subtitle{$subtitle$}$endif$
+\author$if(shortauthor)$[$shortauthor$]$endif${$author$}
+\institute$if(shortinstitute)$[$shortinstitute$]$endif${$institute$}
+\date$if(shortdate)$[$shortdate$]$endif${$date$}
+
+%%%%%%%%%%%%%%%%%%%%
+%%% talk slides  %%%
+%%%%%%%%%%%%%%%%%%%%
 
 \begin{document}
-$if(title)$
-\frame{\titlepage}
-$endif$
+
+\begin{frame}[plain]
+  % top line: IC logo to the left, SHiP logo to the right
+  \tikz [remember picture,overlay]
+      \node at ([yshift=3.5cm,xshift=-1cm]current page.east)
+                        {\includegraphics[height=.2\textheight]{/home/ol11/Pictures/SHiP-Full_Black.pdf}};
+  \includegraphics[scale=0.25]{/home/ol11/Pictures/iclogo.pdf}
+  \hfill
+  \vfill
+  \vspace*{7.5em} % some nice whitespace
+  \Huge{\bf \inserttitle }\\
+  \vspace*{0.5em}
+  $if(subtitle)$
+  \Large{\bf \insertsubtitle }\\
+  \vspace*{0.5em}
+  $endif$
+  \large{ \insertauthor }$if(on_behalf)$\,\,\textit{\small on behalf of the
+  $on_behalf$.}$endif$
+  \hfill
+\scriptsize{[\href{mailto:oliver.lantwin@cern.ch}{oliver.lantwin@cern.ch}]}\\\vspace*{0.5em}
+  \footnotesize{ \insertdate }\\
+  \vspace*{-2em}
+\end{frame}
+%}
 
 $for(include-before)$
 $include-before$
 
 $endfor$
+
 $if(toc)$
-\begin{frame}
-\tableofcontents[hideallsubsections]
-\end{frame}
+  \begin{frame}
+    \tableofcontents[]
+  \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% define the format for my section divider slides here,
+% after the "Introduction" section since it's silly to
+% have a section divider straight after the ToC proper
+\AtBeginSection[]
+{
+  \begin{frame}[plain]
+    \addtocounter{framenumber}{-1}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 $endif$
+
 $body$
 
-$if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(book-class)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-\bibliographytrue
-\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+% stop page counting for total
+\beginbackup
+
+% new section but we don't want it to appear on the ToC
+\section*{Backup}
+
+% nice plain slide
+\begin{frame}[plain]
+  \vfill
+  \huge{\bf [Backup Slides]}
+  \vfill
 \end{frame}
 
-$endif$
-$endif$
-$if(biblatex)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-\bibliographytrue
-\printbibliography[heading=none]
-\end{frame}
-
-$endif$
 $for(include-after)$
-$include-after$
-
+  $include-after$
 $endfor$
+% finish backup
+\backupend
+
 \end{document}
