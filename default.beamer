@@ -40,6 +40,9 @@ $else$
 \setbeamertemplate{note page}[plain]
 $endif$
 
+% Space between paragraphs on notes page
+\addtobeamertemplate{note page}{\setlength{\parskip}{12pt}}
+
 %%%%%%%%%%%%%%%%%%
 %%% colouring  %%%
 %%%%%%%%%%%%%%%%%%
@@ -244,6 +247,12 @@ $if(subtitle)$\subtitle{$subtitle$}$endif$
 \scriptsize{[\href{mailto:oliver.lantwin@cern.ch}{oliver.lantwin@cern.ch}]}\\\vspace*{0.5em}
   \footnotesize{ \insertdate }\\
   \vspace*{-2em}
+  \note{\Huge{\bf \inserttitle }\\
+
+  $if(abstract)$
+  $abstract$
+  $endif$
+}
 \end{frame}
 %}
 
