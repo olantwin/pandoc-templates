@@ -1,4 +1,5 @@
-\documentclass[$if(fontsize)$$fontsize$,$else$9pt,$endif$]{beamer}
+%    vim: ft=tex
+\documentclass[$if(fontsize)$$fontsize$,$else$9pt,$endif$$if(handout)$handout,$endif$]{beamer}
 % use minimalist beamer template as a starting point
 \usebeamertemplate{default}
 $if(graphics)$
@@ -13,6 +14,10 @@ $if(graphics)$
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
+%%%%%%%%%%%%%%%%%%
+%%% listings   %%%
+%%%%%%%%%%%%%%%%%%
+
 $if(listings)$
 \usepackage{listings}
 $endif$
@@ -21,6 +26,18 @@ $highlighting-macros$
 $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
+$endif$
+
+%%%%%%%%%%%%%%%%%%
+%%% handouts   %%%
+%%%%%%%%%%%%%%%%%%
+
+$if(handout)$
+\setbeameroption{show notes}
+\setbeamertemplate{note page}[plain]
+$else$
+\setbeameroption{hide notes}
+\setbeamertemplate{note page}[plain]
 $endif$
 
 %%%%%%%%%%%%%%%%%%
