@@ -13,6 +13,16 @@ $if(graphics)$
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+
 %%%%%%%%%%%%%%%%%%
 %%% colouring  %%%
 %%%%%%%%%%%%%%%%%%
