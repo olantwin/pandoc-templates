@@ -32,6 +32,13 @@ $endif$
 %%% handouts   %%%
 %%%%%%%%%%%%%%%%%%
 
+\makeatletter
+\def\beamer@framenotesbegin{%
+  \gdef\beamer@noteitems{}%
+  \gdef\beamer@notes{{}}%
+}
+\makeatother
+
 $if(handout)$
 \setbeameroption{show notes}
 \setbeamertemplate{note page}[plain]
