@@ -223,7 +223,8 @@ $endfor$
 
 \title{$title$}
 $if(subtitle)$\subtitle{$subtitle$}$endif$
-\author$if(shortauthor)$[$shortauthor$]$endif${$author$}
+\author$if(shortauthor)$[$shortauthor$]$endif${$if(other_authors)$\underline{$author$},
+$for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
 \institute$if(shortinstitute)$[$shortinstitute$]$endif${$institute$}
 \date$if(shortdate)$[$shortdate$]$endif${$date$}
 
