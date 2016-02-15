@@ -164,6 +164,8 @@ $endif$
 % seriously, they contribute ABSOLUTELY NOTHING
 \setbeamertemplate{navigation symbols}{}
 
+\logo{\includegraphics[height=.2\textheight]{/home/ol11/Pictures/SHiP-Full_Black.pdf}\vspace{220pt}}
+
 % edits the template's footer
 \setbeamertemplate
 {footline}              %
@@ -255,7 +257,7 @@ $for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
 \scriptsize{[\href{mailto:oliver.lantwin@cern.ch}{oliver.lantwin@cern.ch}]}\\\vspace*{0.5em}
   \footnotesize{ \insertdate }\\
   \vspace*{-2em}
-  \note{\Huge{\bf \inserttitle }\\
+  \note{{\bf \inserttitle} \\
 
   $if(abstract)$
   $abstract$
