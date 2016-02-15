@@ -14,6 +14,8 @@ $if(graphics)$
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
 $endif$
 
+\graphicspath{{./figs/}}
+
 %%%%%%%%%%%%%%%%%%
 %%% listings   %%%
 %%%%%%%%%%%%%%%%%%
