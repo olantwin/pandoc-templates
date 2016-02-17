@@ -1,5 +1,6 @@
 %    vim: ft=tex
 \documentclass[$if(fontsize)$$fontsize$,$else$9pt,$endif$$if(handout)$handout,$endif$]{beamer}
+\usepackage{etex}
 % use minimalist beamer template as a starting point
 \usebeamertemplate{default}
 $if(graphics)$
@@ -133,12 +134,22 @@ $endif$
 % split long lists etc into two columns
 \usepackage{multicol}
 
-%%%%%%%%%%%%%%%%%%%
-%% table spacing %%
-%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%
+%% tables %%
+%%%%%%%%%%%%
 %\newcommand\Top{\rule{0pt}{2.6ex}}
 %\newcommand\Bot{\rule[-1.2ex]{0pt}{0pt}}
 \renewcommand{\arraystretch}{1.5}
+
+
+\usepackage{longtable,booktabs}
+\usepackage{caption}
+$if(tables)$
+% These lines are needed to make table captions work with longtable:
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+$endif$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -216,10 +227,15 @@ $endif$
   \usepackage[british]{babel}
 \fi
 
+% set up alerts
+\setbeamercolor{alerted text}{fg=blue}
+% use alert instead of emph
+\mode<presentation>{\let\emph\alert}
+
+
 $for(header-includes)$
 $header-includes$
 $endfor$
-
 
 %%%%%%%%%%%%%%%%%%%%%
 %%% title fields  %%%
