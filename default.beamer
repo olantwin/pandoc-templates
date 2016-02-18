@@ -69,6 +69,7 @@ $endif$
 \definecolor{vertleger}{RGB}{183,225,184}
 \definecolor{purple}{RGB}{138, 43, 226}
 \definecolor{lightgray}{gray}{0.5}
+\definecolor{cern-blue}{RGB}{0,83,161}
 
 % set colors
 \setbeamercolor{title}{fg=black}
@@ -122,9 +123,9 @@ $endif$
     colorlinks=true,       % false: boxed links; true: colored links
     %pdfborderstyle={/S/U/W 1}
     linkcolor=black,        % color of internal links
-    citecolor=blue,        % color of links to bibliography
-    filecolor=blue,      % color of file links
-    urlcolor=blue,          % color of external links
+    citecolor=cern-blue,        % color of links to bibliography
+    filecolor=cern-blue,      % color of file links
+    urlcolor=cern-blue,          % color of external links
     %linkbordercolor=blue
 }
 
@@ -228,7 +229,7 @@ $endif$
 \fi
 
 % set up alerts
-\setbeamercolor{alerted text}{fg=blue}
+\setbeamercolor{alerted text}{fg=cern-blue}
 % use alert instead of emph
 \mode<presentation>{\let\emph\alert}
 
