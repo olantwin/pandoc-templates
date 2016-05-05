@@ -162,6 +162,15 @@ $endif$
 \newcommand{\beginbackup}{
    \newcounter{framenumbervorappendix}
    \setcounter{framenumbervorappendix}{\value{framenumber}}
+   % new section but we don't want it to appear on the ToC
+   \section*{Backup}
+
+   % nice plain slide
+   \begin{frame}[plain]
+     \vfill
+     \huge{\bf [Backup Slides]}
+     \vfill
+   \end{frame}
 }
 \newcommand{\backupend}{
    \addtocounter{framenumbervorappendix}{-\value{framenumber}}
@@ -312,23 +321,16 @@ $endif$
 
 $body$
 
+$if(backup)$
+
 % stop page counting for total
 \beginbackup
-
-% new section but we don't want it to appear on the ToC
-\section*{Backup}
-
-% nice plain slide
-\begin{frame}[plain]
-  \vfill
-  \huge{\bf [Backup Slides]}
-  \vfill
-\end{frame}
 
 $for(include-after)$
   $include-after$
 $endfor$
 % finish backup
 \backupend
+$endif$
 
 \end{document}
