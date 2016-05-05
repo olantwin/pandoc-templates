@@ -1,0 +1,322 @@
+%    vim: ft=tex
+%%% Defined variables (extra):
+%%% $id$ -- CDS Document ID
+%%% $type$ -- NOTE, PROC, INT
+%%% $linenumbers$ (boolean)
+\documentclass[12pt,a4paper]{article}
+% For two column text, add "twocolumn" as an option to the document
+% class. Also uncomment the two "onecolumn" and "twocolumn" lines
+% around the title page below.
+
+% Variables that controls behaviour
+\usepackage{ifthen} % for conditional statements
+\usepackage{subfigure}
+
+\usepackage[abs]{overpic}
+\setlength\unitlength{1mm}
+
+\newboolean{pdflatex}
+%\setboolean{pdflatex}{False} % False for eps figures
+
+
+\newboolean{uprightparticles}
+\setboolean{uprightparticles}{false} %True for upright particle symbols
+
+%% %%%%%%%%%%%%%%%%%%
+%%  Page formatting
+%% %%%%%%%%%%%%%%%%%%
+\textheight=230mm
+\textwidth=160mm
+\oddsidemargin=7mm
+\evensidemargin=-10mm
+\topmargin=-10mm
+\headsep=20mm
+\columnsep=5mm
+\addtolength{\belowcaptionskip}{0.5em}
+
+\renewcommand{\textfraction}{0.01}
+\renewcommand{\floatpagefraction}{0.99}
+\renewcommand{\topfraction}{0.9}
+\renewcommand{\bottomfraction}{0.9}
+
+
+\setlength{\hoffset}{-2cm}
+\setlength{\voffset}{-2cm}
+% Page defaults ...
+\topmargin=0.5cm
+\oddsidemargin=2.5cm
+\textwidth=16cm
+\textheight=22cm
+% Allow the page size to vary a bit ...
+\raggedbottom
+% To avoid Latex to be too fussy with line breaking ...
+\sloppy
+
+%% %%%%%%%%%%%%%%%%%%%%%%%
+%% Packages to be used
+%% %%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{microtype}
+\usepackage{lineno}  % for line numbering during review
+\usepackage{xspace} % To avoid problems with missing or double spaces after
+                    % predefined symbold
+%Tables
+\usepackage{tabularx}
+%% Graphics
+\usepackage{graphicx}  % to include figures (can also use other packages)
+\usepackage{color}
+\usepackage{colortbl}
+\graphicspath{{./figs/}} % Make Latex search fig subdir for figures
+
+%% Figures
+\usepackage{subfigure}
+
+%% Math
+\usepackage{amsmath} % Adds a large collection of math symbols
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{upgreek} % Adds in support for greek letters in roman typeset
+
+%% fix to allow peaceful coexistence of line numbering and
+%% mathematical objects
+%% http://www.latex-community.org/forum/viewtopic.php?f=5&t=163
+%%
+\newcommand*\patchAmsMathEnvironmentForLineno[1]{%
+\expandafter\let\csname old#1\expandafter\endcsname\csname #1\endcsname
+\expandafter\let\csname oldend#1\expandafter\endcsname\csname
+end#1\endcsname
+ \renewenvironment{#1}%
+   {\linenomath\csname old#1\endcsname}%
+   {\csname oldend#1\endcsname\endlinenomath}%
+}
+\newcommand*\patchBothAmsMathEnvironmentsForLineno[1]{%
+  \patchAmsMathEnvironmentForLineno{#1}%
+  \patchAmsMathEnvironmentForLineno{#1*}%
+}
+\AtBeginDocument{%
+\patchBothAmsMathEnvironmentsForLineno{equation}%
+\patchBothAmsMathEnvironmentsForLineno{align}%
+\patchBothAmsMathEnvironmentsForLineno{flalign}%
+\patchBothAmsMathEnvironmentsForLineno{alignat}%
+\patchBothAmsMathEnvironmentsForLineno{gather}%
+\patchBothAmsMathEnvironmentsForLineno{multline}%
+}
+
+% Get hyperlinks to captions and in references.
+% These do not work with revtex. Use "hypertext" as class option instead.
+\usepackage{hyperref}    % Hyperlinks in references
+\usepackage[all]{hypcap} % Internal hyperlinks to floats.
+\hypersetup{unicode=true,
+$if(title-meta)$
+            pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+            pdfauthor={$author-meta$},
+$endif$
+$if(keywords)$
+            pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+$endif$
+            pdfborder={0 0 0},
+            breaklinks=true}
+
+\input{ship-symbols-def} % Add in the predefined SHiP symbols
+
+% Make this the last packages you include before the \begin{document}
+\usepackage{cite} % Allows for ranges in citations
+\usepackage{mciteplus}
+
+\usepackage{relsize}
+
+\def\ifmonospace{\ifdim\fontdimen3\font=0pt }
+
+%c C plus plus
+\def\C++{%
+\ifmonospace%
+    C++%
+\else%
+    C\kern-.1667em\raise.30ex\hbox{\smaller{++}}%
+\fi%
+\spacefactor1000 }
+
+%c C sharp
+\def\Csharp{%
+\ifmonospace%
+    C\#%
+\else%
+    C\kern-.1667em\raise.30ex\hbox{\smaller{\#}}%
+\fi%
+\spacefactor1000 }
+
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Title     %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\setcounter{footnote}{1}
+
+$if(linenumbers)$
+\linenumbers*[1]
+$endif$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%  TITLE PAGE  %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+
+\pagenumbering{roman}
+
+% Header ---------------------------------------------------
+\vspace*{-2.5cm}
+\centerline{\large EUROPEAN ORGANIZATION FOR NUCLEAR RESEARCH (CERN)}
+\vspace*{0.2cm}
+\hspace*{-15mm}\begin{tabular*}{16.5cm}{lc@{\extracolsep{\fill}}r}
+\vspace*{-10mm}\mbox{\includegraphics[width=0.15\linewidth]{\string~/Pictures/SHiP-logo.pdf}}& & \\
+ & & CERN-SHiP-$type$-$id$ \\
+ & & $date$ \\
+% & & \\
+\hline
+\end{tabular*}
+
+\vspace*{4.0cm}
+
+% Title --------------------------------------------------
+{\bf\boldmath\huge
+\begin{center}
+  $title$
+\end{center}
+}
+
+\vspace*{2.0cm}
+
+% Authors -------------------------------------------------
+\begin{center}
+$for(author)$
+$author.name$\(^$author.number$\)$sep$, $endfor$
+\bigskip\\
+{\it\footnotesize
+$for(author)$
+\(^$author.number$\)$author.institute$$sep$, $endfor$\\
+}
+\end{center}
+
+\vspace{\fill}
+
+% Abstract -----------------------------------------------
+\begin{abstract}
+  \noindent
+  $abstract$
+\end{abstract}
+
+\vspace*{2.0cm}
+\vspace{\fill}
+
+\end{titlepage}
+
+
+\pagestyle{empty}  % no page number for the title
+
+%  empty page follows the title page ----
+\newpage
+\setcounter{page}{2}
+\mbox{~}
+
+\cleardoublepage
+%\twocolumn
+% %%%%%%%%%%%%% ---------
+
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\setcounter{footnote}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%  Table of Content   %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Uncomment next 2 lines if desired
+\tableofcontents
+\cleardoublepage
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Main text %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\pagestyle{plain} % restore page numbers for the main text
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+$if(linenumbers)$
+\linenumbers
+$endif$
+
+% You can include short sections directly in the main tex file.
+% However, for larger papers it is desirable to split the text into
+% several semiautonomous files, which can be revised independently.
+% This is especially useful when developing a document in
+% collaboration with several people, since then different parts can be
+% edited independently.  This type of file organization is shown here.
+%
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+$body$
+
+$for(include-after)$
+$include-after$
+
+$endfor$
+
+\begin{thebibliography}{999}
+\bibitem{SHiP:EOI}
+W. Bonivento et al., \emph{Proposal to Search for Heavy Neutral Leptons at the
+SPS}, October 2013, arXiv:130.1762v1.
+\\
+\bibitem{SHiP:TP}
+The SHiP Collaboration, \emph{Technical Proposal. An Experiment to Search for Hidden Particles (SHiP)
+at the SPS}, CERN-SPSC-2015-016, SPSC-P-350, 8 April 2015.
+\\
+
+\bibitem{SHiP:PP}
+Alekhin, S. et al., Search for Hidden Particles,
+  CERN-SPSC-2015-017, SPSC-P-350-ADD-1, 9 April 2015.
+\\
+
+\bibitem{SHiP:TPadd}
+The SHiP Collaboration, \emph{Addendum to Technical Proposal. An Experiment to Search for Hidden Particles (SHiP)
+at the SPS}, CERN-SPSC-2015-040, SPSC-P-350-ADD-2, 19 October 2015
+\\
+
+
+\end{thebibliography}
+
+%\begin{enumerate}
+%
+%\item Citations are marked using square brackets, and the
+%  corresponding references should be typeset using Bib\TeX\ and the
+%  official \lhcb Bib\TeX\ style. An example is in
+%  Ref.~\cite{Sjostrand:2006za}.
+
+%\item For references with four or less authors all of the authors'
+%  names are listed~\cite{Majorana:1937vz}, otherwise the first author
+%  is given, followed by \etal. The \lhcb Bib\TeX\ style will
+%  take care of this.
+
+%\item The order of references should be sequential when reading the
+%  document. This is automatic when using Bib\TeX.
+
+%\item The titles of papers should in general be included. To remove
+%  them, change \texttt{\textbackslash
+%    setboolean\{articletitles\}\{false\}} to \texttt{true} at the top
+% of this template.
+
+%\end{enumerate}
+
+%There is a set of standard references to be used in \lhcb that are
+%listed in Appendix~\ref{sec:StandardReferences}.
+
+\end{document}
