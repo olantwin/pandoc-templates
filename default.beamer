@@ -117,6 +117,10 @@ $endif$
 
 % split long lists etc into two columns
 \usepackage{multicol}
+\newcommand{\beginmulticols}[1]{\begin{multicols}{#1}}
+\newcommand{\stopmulticols}{\end{multicols}}
+\newcommand{\begincols}{\begin{columns}}
+\newcommand{\stopcols}{\end{columns}}
 
 %%%%%%%%%%%%
 %% tables %%
