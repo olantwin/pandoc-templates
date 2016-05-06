@@ -83,14 +83,6 @@ $endif$
 %%% font formatting  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%
 
-% a font package which has a nicer serif font
-% than usual
-%\usepackage{helvet}
-%\usepackage{charter}
-%i%\usepackage{epigrafica}
-%\usepackage{eulervm}
-%\renewcommand*\rmdefault{charter}
-
 % makes bulleted lists appear slightly
 % transparent before uncovering the bullet
 \beamertemplatetransparentcovereddynamicmedium
@@ -98,11 +90,13 @@ $endif$
 % puts titles in bold
 \usefonttheme{structurebold}
 
-% makes font serif
-\renewcommand*\sfdefault{epigrafica}
-\usefonttheme[onlymath]{serif}
+\usefonttheme{professionalfonts}
+\usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
 \usepackage{microtype}
 \usepackage{wrapfig}
+\usepackage{libertine}
+\usepackage[libertine]{newtxmath}
+\usepackage[T1]{fontenc}
 
 % include and configure hyperlinks
 \usepackage{hyperref}
@@ -273,16 +267,16 @@ $for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
   \hfill
   \vfill
   \vspace*{7.5em} % some nice whitespace
-  \Huge{\bf \inserttitle }\\
+  \Huge{\structure{ \inserttitle }}\\
   \vspace*{0.5em}
   $if(subtitle)$
-  \Large{\bf \insertsubtitle }\\
+  \Large{\structure{ \insertsubtitle }}\\
   \vspace*{0.5em}
   $endif$
   \large{ \insertauthor }$if(on_behalf)$\,\,\textit{\small on behalf of the
   $on_behalf$.}$endif$
   \hfill
-\scriptsize{[\href{mailto:oliver.lantwin@cern.ch}{oliver.lantwin@cern.ch}]}\\\vspace*{0.5em}
+  \scriptsize{[\href{mailto:oliver.lantwin@cern.ch}{\texttt{oliver.lantwin@cern.ch}}]}\\\vspace*{0.5em}
   \footnotesize{ \insertdate }\\
   \vspace*{-2em}
   \note{{\bf \inserttitle} \\
