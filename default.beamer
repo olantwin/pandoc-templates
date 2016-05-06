@@ -144,6 +144,7 @@ $endif$
 %%% math and symbol formatting  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsmath}
+\usepackage{slashed}
 
 % Backup with slide numbers that don't contribute to the total
 \newcommand{\beginbackup}{
