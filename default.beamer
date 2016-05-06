@@ -102,25 +102,14 @@ $endif$
 \usepackage{hyperref}
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
-    %unicode=false,          % non-Latin characters in Acrobat’s bookmarks
     pdftoolbar=true,        % show Acrobat’s toolbar?
     pdfmenubar=true,        % show Acrobat’s menu?
     pdffitwindow=false,     % window fit to page when opened
-    %pdfstartview={FitH},    % fits the width of the page to the window
-    %pdftitle={My title},    % title
-    %pdfauthor={Author},     % author
-    %pdfsubject={Subject},   % subject of the document
-    %pdfcreator={Creator},   % creator of the document
-    %pdfproducer={Producer}, % producer of the document
-    %pdfkeywords={keyword1} {key2} {key3}, % list of keywords
-    %pdfnewwindow=true,      % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
-    %pdfborderstyle={/S/U/W 1}
     linkcolor=black,        % color of internal links
     citecolor=cern-blue,        % color of links to bibliography
     filecolor=cern-blue,      % color of file links
     urlcolor=cern-blue,          % color of external links
-    %linkbordercolor=blue
 }
 
 % allow for upright greek
@@ -189,9 +178,6 @@ $endif$
 {                       %
 \color{gray}            % makes the text in the footer grey
 \hspace*{1em}           % moves stuff 1em from the LHS of the page
-%\,/\,                   %  linux directory type structure
-%\insertsubsection       %
-%\hfill                  % horizontal filling space
 \insertshortauthor      % inserts author arguement in []'s
 \,$if(institute)$(\insertshortinstitute)$endif$
 \hspace*{1em}           % a 1em space between author and page number
@@ -201,10 +187,8 @@ $endif$
 \hfill
 \insertframenumber/\inserttotalframenumber      % page number
 \hspace*{1em}           % moves stuff 1em from the RHS of the page
-% \vskip0.05cm          % moves stuff 10pts up from the bottom
 \vspace*{1em}           %
 }
-%\setlength{\leftmargini}{0pt}
 \makeatletter
 \g@addto@macro\bfseries{\boldmath}
 \makeatother
@@ -235,7 +219,6 @@ $endif$
 \setbeamercolor{alerted text}{fg=cern-blue}
 % use alert instead of emph
 \mode<presentation>{\let\emph\alert}
-
 
 $for(header-includes)$
 $header-includes$
@@ -286,7 +269,6 @@ $for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
   $endif$
 }
 \end{frame}
-%}
 
 $for(include-before)$
 $include-before$
