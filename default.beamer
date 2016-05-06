@@ -170,7 +170,9 @@ $endif$
 % seriously, they contribute ABSOLUTELY NOTHING
 \setbeamertemplate{navigation symbols}{}
 
-\logo{\includegraphics[height=.2\textheight]{/home/ol11/Pictures/SHiP-Full_Black.pdf}\vspace{220pt}}
+$if(ship)$
+\logo{\includegraphics[height=.2\textheight]{\string~/Pictures/SHiP-Symbol_Black.pdf}\vspace{220pt}}
+$endif$
 
 % edits the template's footer
 \setbeamertemplate
@@ -245,8 +247,8 @@ $for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
   % top line: IC logo to the left, SHiP logo to the right
   \tikz [remember picture,overlay]
       \node at ([yshift=3.5cm,xshift=-1cm]current page.east)
-                        {\includegraphics[height=.2\textheight]{/home/ol11/Pictures/SHiP-Full_Black.pdf}};
-  \includegraphics[scale=0.25]{/home/ol11/Pictures/iclogo.pdf}
+                        {\includegraphics[height=.2\textheight]{\string~/Pictures/SHiP-Full_Black.pdf}};
+  \includegraphics[scale=0.25]{\string~/Pictures/iclogo.pdf}
   \hfill
   \vfill
   \vspace*{7.5em} % some nice whitespace
