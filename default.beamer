@@ -154,7 +154,7 @@ $endif$
    \section*{Backup}
 
    % nice plain slide
-   \begin{frame}[plain]
+   \begin{frame}%[plain]
      \vfill
      \huge{\bf [Backup Slides]}
      \vfill
@@ -293,7 +293,7 @@ $if(toc)$
 % have a section divider straight after the ToC proper
 \AtBeginSection[]
 {
-  \begin{frame}[plain]
+  \begin{frame}%[plain]
     \addtocounter{framenumber}{-1}
     \tableofcontents[currentsection]
   \end{frame}
