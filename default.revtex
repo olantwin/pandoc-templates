@@ -8,14 +8,16 @@
 %  Add 'draft' option to mark overfull boxes with black boxes
 %  Add 'showpacs' option to make PACS codes appear
 %  Add 'showkeys' option to make keywords appear
-\documentclass[$for(classoption)$$classoption$$sep$,$endfor$,amssymb,amsmath]{revtex4-1}
+\documentclass[$if(fontsize)$$fontsize$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$,amssymb,amsmath]{revtex4-1}
 %\documentclass[aps,prl,preprint,groupedaddress]{revtex4-1}
 %\documentclass[aps,prl,preprint,superscriptaddress]{revtex4-1}
 %\documentclass[aps,prl,reprint,groupedaddress]{revtex4-1}
 
 \usepackage{tikz, pgf}
-\usepackage{lmodern}
 \usepackage[T1]{fontenc}
+\usepackage{lmodern} \normalfont %to load T1lmr.fd
+\DeclareFontShape{T1}{lmr}{bx}{sc} { <-> ssub * cmr/bx/sc }{}
+
 % use microtype if available
 \IfFileExists{microtype.sty}{%
 \usepackage{microtype}
@@ -40,8 +42,20 @@ $endif$
 }
 \usepackage{caption}
 \usepackage{subcaption}
+% fix pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$for(package)$
+\usepackage$if(package.option)$[$package.option$]{$package.name$}$else${$package$}$endif$
+$endfor$
+
 $for(header-includes)$
 $header-includes$
+$endfor$
+
+$for(definition)$
+\def $definition.short$ {$definition.command$}
 $endfor$
 
 % You should use BibTeX and apsrev.bst for references
