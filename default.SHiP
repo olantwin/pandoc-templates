@@ -10,7 +10,10 @@
 
 % Variables that controls behaviour
 \usepackage{ifthen} % for conditional statements
-\usepackage{subfigure}
+
+% fix pandoc
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \usepackage[abs]{overpic}
 \setlength\unitlength{1mm}
@@ -66,9 +69,6 @@
 \usepackage{color}
 \usepackage{colortbl}
 \graphicspath{{./figs/}} % Make Latex search fig subdir for figures
-
-%% Figures
-\usepackage{subfigure}
 
 %% Math
 \usepackage{amsmath} % Adds a large collection of math symbols
@@ -146,8 +146,20 @@ $endif$
 \fi%
 \spacefactor1000 }
 
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage[alsoload=hep]{siunitx}
+
+$for(package)$
+\usepackage$if(package.option)$[$package.option$]{$package.name$}$else${$package$}$endif$
+$endfor$
+
 $for(header-includes)$
 $header-includes$
+$endfor$
+
+$for(definition)$
+\def $definition.short$ {$definition.command$}
 $endfor$
 
 \begin{document}
