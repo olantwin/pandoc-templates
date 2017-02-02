@@ -1,5 +1,6 @@
 %    vim: ft=tex
 \documentclass[$if(fontsize)$$fontsize$,$else$9pt,$endif$$if(handout)$handout,$endif$]{beamer}
+\usepackage[utf8]{inputenc}
 \usepackage{etex}
 % use minimalist beamer template as a starting point
 \usebeamertemplate{default}
@@ -91,12 +92,17 @@ $endif$
 \usefonttheme{structurebold}
 
 \usefonttheme{professionalfonts}
-\usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
+% \usefonttheme[stillsansseriflarge,stillsansserifsmall]{serif}
 \usepackage{microtype}
 \usepackage{wrapfig}
-\usepackage{libertine}
+\usepackage[tt=false]{libertine}
 \usepackage[libertine]{newtxmath}
 \usepackage[T1]{fontenc}
+
+% \usepackage[T1]{fontenc}
+% \usepackage[scaled=.85]{FiraMono}
+% \usepackage[sfdefault,scaled=.85]{FiraSans}
+% \usepackage{newtxsf}
 
 % include and configure hyperlinks
 \usepackage{hyperref}
@@ -121,6 +127,8 @@ $endif$
 \newcommand{\stopmulticols}{\end{multicols}}
 \newcommand{\begincols}{\begin{columns}}
 \newcommand{\stopcols}{\end{columns}}
+\newcommand{\begincol}[1]{\begin{column}{#1}}
+\newcommand{\stopcol}{\end{column}}
 
 %%%%%%%%%%%%
 %% tables %%
@@ -144,7 +152,9 @@ $endif$
 %%% math and symbol formatting  %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{amsmath}
+\usepackage{mathtools}
 \usepackage{slashed}
+\usepackage[alsoload=hep]{siunitx}
 
 % Backup with slide numbers that don't contribute to the total
 \newcommand{\beginbackup}{
@@ -202,6 +212,8 @@ $endif$
 \usepackage[absolute,overlay]{textpos}
 \setbeamercolor{block body}{bg=white}
 
+\setbeamertemplate{frametitle}[default][center]
+
 \hypersetup{
   pdftitle={$title$}
   pdfauthor={$author$}
@@ -214,6 +226,7 @@ $endif$
 \usepackage{ulem}
 \usepackage{framed}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 
 \ifxetex
   \usepackage{polyglossia}
@@ -227,9 +240,19 @@ $endif$
 % use alert instead of emph
 \mode<presentation>{\let\emph\alert}
 
+% fix pandoc
+\providecommand{\tightlist}{}%
+%\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+$for(package)$
+\usepackage$if(package.option)$[$package.option$]{$package.name$}$else${$package$}$endif$
+$endfor$
+
 $for(header-includes)$
 $header-includes$
 $endfor$
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 
 %%%%%%%%%%%%%%%%%%%%%
 %%% title fields  %%%
@@ -237,7 +260,7 @@ $endfor$
 
 \title{$title$}
 $if(subtitle)$\subtitle{$subtitle$}$endif$
-\author$if(shortauthor)$[$shortauthor$]$endif${$if(other_authors)$\underline{$author$},
+\author$if(shortauthor)$[$shortauthor$]$else$[$author$]$endif${$if(other_authors)$\underline{$author$}
 $for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
 \institute$if(shortinstitute)$[$shortinstitute$]$endif${$institute$}
 \date$if(occasion)$[$occasion$]$else$[$date$]$endif${$if(occasion)$$occasion$$endif$ \hfill $date$}
@@ -253,7 +276,7 @@ $for(other_authors)$, $other_authors$$endfor$$else$$author$$endif$}
   \tikz [remember picture,overlay]
       \node at ([yshift=3.5cm,xshift=-1cm]current page.east)
                         {\includegraphics[height=.2\textheight]{\string~/Pictures/SHiP-Full_Black.pdf}};
-  \includegraphics[scale=0.25]{\string~/Pictures/iclogo.pdf}
+  \includegraphics[width=0.3\textwidth]{\string~/Pictures/Imperial_1_Pantone_solid.pdf}
   \hfill
   \vfill
   \vspace*{7.5em} % some nice whitespace
