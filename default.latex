@@ -20,6 +20,11 @@ $endif$
 $for(beameroption)$
 \setbeameroption{$beameroption$}
 $endfor$
+\usetheme{olantwin}
+$if(on_behalf)$
+\newcommand{\onbehalf}{$on_behalf$}
+\global\onbehalftrue
+$endif$
 $endif$
 $if(beamerarticle)$
 \usepackage{beamerarticle} % needs to be loaded first
@@ -324,6 +329,7 @@ $endif$
 $if(subtitle)$
 \providecommand{\subtitle}[1]{}
 \subtitle{$subtitle$}
+\global\subtitletrue
 $endif$
 $if(author)$
 \author{$for(author)$$author$$sep$ \and $endfor$}
@@ -338,14 +344,16 @@ $if(titlegraphic)$
 \titlegraphic{\includegraphics{$titlegraphic$}}
 $endif$
 $if(logo)$
-\logo{\includegraphics{$logo$}}
+  \logo{\includegraphics{$logo$}}
+$else$
+  \logo{\includegraphics[height=.2\textheight]{SHiP-Full_Black.pdf}\vspace{220pt}}
 $endif$
 $endif$
 
 \begin{document}
 $if(title)$
 $if(beamer)$
-\frame{\titlepage}
+\frame[plain]{\titlepage}
 $else$
 \maketitle
 $endif$
@@ -365,6 +373,15 @@ $if(beamer)$
 \begin{frame}
 \tableofcontents[hideallsubsections]
 \end{frame}
+
+\AtBeginSection[]
+{
+  \begin{frame}%[plain]
+    \addtocounter{framenumber}{-1}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
 $else$
 {
 $if(colorlinks)$
@@ -414,8 +431,20 @@ $else$
 $endif$
 
 $endif$
+$if(beamer)$
+  $if(backup)$
+  \beginbackup
+  $endif$
+$endif$
+
 $for(include-after)$
 $include-after$
+
+$if(beamer)$
+  $if(backup)$
+  \backupend
+  $endif$
+$endif$
 
 $endfor$
 \end{document}
