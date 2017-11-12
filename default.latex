@@ -13,6 +13,8 @@ $if(background-image)$
 }
 $endif$
 \usepackage{pgfpages}
+\newif\ifsubtitle
+\newif\ifonbehalf
 \setbeamertemplate{caption}[numbered]
 \setbeamertemplate{caption label separator}{: }
 \setbeamercolor{caption name}{fg=normal text.fg}
@@ -20,7 +22,6 @@ $endif$
 $for(beameroption)$
 \setbeameroption{$beameroption$}
 $endfor$
-\usetheme{olantwin}
 $if(on_behalf)$
 \newcommand{\onbehalf}{$on_behalf$}
 \global\onbehalftrue
@@ -100,6 +101,8 @@ $endif$
 $if(beamer)$
 $if(theme)$
 \usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
+$else$
+\usetheme{olantwin}
 $endif$
 $if(colortheme)$
 \usecolortheme{$colortheme$}
@@ -281,6 +284,10 @@ $endif$
 \def\fps@figure{htbp}
 \makeatother
 
+$for(package)$
+\usepackage$if(package.option)$[$package.option$]{$package.name$}$else${$package$}$endif$
+$endfor$
+
 $for(header-includes)$
 $header-includes$
 $endfor$
@@ -346,7 +353,9 @@ $endif$
 $if(logo)$
   \logo{\includegraphics{$logo$}}
 $else$
-  \logo{\includegraphics[height=.2\textheight]{SHiP-Full_Black.pdf}\vspace{220pt}}
+  $if(ship)$
+    \logo{\includegraphics[height=.2\textheight]{SHiP-Full_Black.pdf}\vspace{220pt}}
+  $endif$
 $endif$
 $endif$
 
@@ -371,7 +380,8 @@ $endfor$
 $if(toc)$
 $if(beamer)$
 \begin{frame}
-\tableofcontents[hideallsubsections]
+\addtocounter{framenumber}{-1}
+\tableofcontents
 \end{frame}
 
 \AtBeginSection[]
