@@ -345,7 +345,13 @@ $if(institute)$
 \providecommand{\institute}[1]{}
 \institute{$for(institute)$$institute$$sep$ \and $endfor$}
 $endif$
-\date{$date$}
+$if(beamer)$
+  $if(occasion)$
+  \date[$occasion$]{$occasion$ \hfill $date$}
+  $else$
+  \date{$date$}
+  $endif$
+$endif$
 $if(beamer)$
 $if(titlegraphic)$
 \titlegraphic{\includegraphics{$titlegraphic$}}
